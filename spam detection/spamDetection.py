@@ -8,10 +8,14 @@ from collections import Counter
 from nltk import NaiveBayesClassifier, classify
 
 # Đường dẫn đến thư mục chứa email spam và non-spam
-spam_folder = 'Downloads/spam_filter/enron1/spam/' #duong dan toi thu muc chua thu rac
-ham_folder = 'Downloads/spam_filter/enron1/ham/' #duong dan toi thu muc chua thu binh thuong
+# duong dan toi thu muc chua thu rac
+spam_folder = 'Python/project/spam detection/spam_filter/enron1/spam'
+# duong dan toi thu muc chua thu binh thuong
+ham_folder = 'Python/project/spam detection/spam_filter/enron1/ham'
 
 # Hàm để đọc dữ liệu từ các tệp tin trong thư mục và gán nhãn
+
+
 def read_files_from_folder(folder, label):
     emails = []
     files = os.listdir(folder)
@@ -20,6 +24,7 @@ def read_files_from_folder(folder, label):
             content = f.read()
             emails.append((content, label))
     return emails
+
 
 # Đọc dữ liệu từ các tệp tin trong thư mục spam và gán nhãn là "spam"
 spam_emails = read_files_from_folder(spam_folder, 'spam')
@@ -31,13 +36,17 @@ non_spam_emails = read_files_from_folder(ham_folder, 'non-spam')
 emails = spam_emails + non_spam_emails
 
 # Hàm xử lý dữ liệu: loại bỏ dấu câu, chuyển về chữ thường, lemmatize và loại bỏ từ dừng
+
+
 def process_text(text):
     lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words('english'))
     tokens = word_tokenize(text)
-    tokens = [lemmatizer.lemmatize(word.lower()) for word in tokens if word.isalpha()]
+    tokens = [lemmatizer.lemmatize(word.lower())
+              for word in tokens if word.isalpha()]
     tokens = [word for word in tokens if word not in stop_words]
     return dict(Counter(tokens))
+
 
 # Chuẩn bị dữ liệu huấn luyện
 processed_emails = [(process_text(email), label) for (email, label) in emails]
