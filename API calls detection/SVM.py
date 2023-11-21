@@ -26,7 +26,7 @@ X = preprocessing.scale(X)
 
 # extract the most important features
 Features = [i.strip()
-            for i in open("Python/project/Android_Feats.csv").readlines()]
+            for i in open("Python/project/API calls detection/Android_Feats.csv").readlines()]
 Features = np.array(Features)
 MI = mutual_info_classif(X, Y)
 Featuresind = sorted(range(len(MI)), key=lambda i: MI[i], reverse=True)[:50]
