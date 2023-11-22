@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn import *
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 
 training_data = np.genfromtxt(
     'Python/project/url detection/Training_Dataset.csv', delimiter=',', dtype=np.int32)
@@ -17,9 +17,13 @@ testing_inputs = inputs[2000:]
 testing_outputs = outputs[2000:]
 
 # create a Logistic Regression classifier
-classifier = LogisticRegression()
-classifier.fit(training_inputs, training_outputs)
-predictions = classifier.predict(testing_inputs)
-accuracy = 100.0 * accuracy_score(testing_outputs, predictions)
+clf = LogisticRegression()
+clf.fit(training_inputs, training_outputs)
 
-print("The accuracy of your Logistic Regression on testing data is: " + str(accuracy))
+# Dự đoán và đánh giá mô hình
+y_pred = clf.predict(testing_inputs)
+accuracy = accuracy_score(testing_outputs, y_pred)
+conf_matrix = confusion_matrix(testing_outputs, y_pred)
+
+print(f"Accuracy: {accuracy}")
+print(f"Confusion Matrix:\n{conf_matrix}")

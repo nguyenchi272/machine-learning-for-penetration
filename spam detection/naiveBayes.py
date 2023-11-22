@@ -1,6 +1,5 @@
 import os
 import random
-import nltk
 from nltk import word_tokenize
 from nltk.corpus import stopwords
 from nltk import WordNetLemmatizer
@@ -8,9 +7,7 @@ from collections import Counter
 from nltk import NaiveBayesClassifier, classify
 
 # Đường dẫn đến thư mục chứa email spam và non-spam
-# duong dan toi thu muc chua thu rac
 spam_folder = 'Python/project/spam detection/spam_filter/enron1/spam'
-# duong dan toi thu muc chua thu binh thuong
 ham_folder = 'Python/project/spam detection/spam_filter/enron1/ham'
 
 # Hàm để đọc dữ liệu từ các tệp tin trong thư mục và gán nhãn
@@ -62,7 +59,6 @@ classifier = NaiveBayesClassifier.train(train_set)
 
 # Đánh giá mô hình
 accuracy = classify.accuracy(classifier, test_set)
-print("Accuracy training  is: ", classify.accuracy(classifier, train_set))
 print("Accuracy testing is: ", classify.accuracy(classifier, test_set))
 
 # Sử dụng mô hình để dự đoán

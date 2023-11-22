@@ -8,7 +8,7 @@ from sklearn import model_selection
 from sklearn.metrics import confusion_matrix
 
 MalwareDataset = pd.read_csv(
-    'Python/project/PE detection/PE_Detection.py', sep='|')
+    'Python/project/PE detection/MalwareData.csv', sep='|')
 Legit = MalwareDataset[0:41323].drop(['legitimate'], axis=1)
 malware = MalwareDataset[41323::].drop(['legitimate'], axis=1)
 
